@@ -1,6 +1,26 @@
 (function () {
   var cfg = window.SITE_CONFIG || {};
 
+  // ---- Campaign (UTM) detection ----
+  function slug(s) {
+    return String(s || '')
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+      .slice(0, 60);
+  }
+  var params = new URLSearchParams(window.location.search);
+  var campaignRaw = (params.get('utm_campaign') || '').trim().slice(0, 60);
+  // Keep only readable characters so a crafted link can't inject odd text into the message.
+  var campaignLabel = campaignRaw.replace(/[^\p{L}\p{N} _.-]/gu, '').trim();
+  var campaign = slug(campaignRaw);
+
+  function whatsappMessage() {
+    var messages = cfg.campaignMessages || {};
+    if (campaign && messages[campaign]) return messages[campaign];
+    var base = cfg.whatsappMessage || '';
+    return campaignLabel ? base + ' (anúncio: ' + campaignLabel + ')' : base;
+  }
+
   // ---- Meta Pixel (only loads when an ID is configured) ----
   if (cfg.metaPixelId) {
     /* eslint-disable */
@@ -14,59 +34,30 @@
     window.fbq('track', 'PageView');
   }
 
-  function track(origin) {
-    if (typeof window.fbq === 'function') {
-      window.fbq('track', 'Contact', { content_name: 'whatsapp', origin: origin });
-      window.fbq('trackCustom', 'WhatsAppClick', { origin: origin });
+  function track(event, origin) {
+    if (typeof window.fbq !== 'function') return;
+    var data = { origin: origin, campaign: campaign || 'organico' };
+    if (event === 'whatsapp') {
+      window.fbq('track', 'Contact', data);
+      window.fbq('trackCustom', 'WhatsAppClick', data);
+    } else {
+      window.fbq('trackCustom', 'InstagramClick', data);
     }
   }
 
   // ---- WhatsApp links ----
   var waUrl = 'https://wa.me/' + cfg.whatsappNumber +
-    '?text=' + encodeURIComponent(cfg.whatsappMessage || '');
+    '?text=' + encodeURIComponent(whatsappMessage());
 
   document.querySelectorAll('.js-whatsapp').forEach(function (el) {
     el.setAttribute('href', waUrl);
     el.setAttribute('target', '_blank');
     el.setAttribute('rel', 'noopener');
-    el.addEventListener('click', function () { track(el.dataset.origin || 'link'); });
+    el.addEventListener('click', function () { track('whatsapp', el.dataset.origin || 'link'); });
   });
 
-  // ---- Instagram posts (official embed, loaded only when the section is near) ----
-  var posts = (cfg.instagramPosts || []).filter(Boolean);
-  var postsBox = document.getElementById('insta-posts');
-  if (posts.length && postsBox) {
-    posts.forEach(function (url) {
-      var clean = url.split('?')[0].replace(/\/?$/, '/');
-      var bq = document.createElement('blockquote');
-      bq.className = 'instagram-media';
-      bq.setAttribute('data-instgrm-permalink', clean);
-      bq.setAttribute('data-instgrm-version', '14');
-      var a = document.createElement('a');
-      a.href = clean; a.target = '_blank'; a.rel = 'noopener';
-      a.textContent = 'Ver este trabalho no Instagram';
-      bq.appendChild(a);
-      postsBox.appendChild(bq);
-    });
-    postsBox.hidden = false;
-    document.getElementById('insta-card').hidden = true;
-    document.getElementById('insta-more').hidden = false;
-    document.getElementById('insta-hint').hidden = false;
-
-    var loaded = false;
-    function loadEmbeds() {
-      if (loaded) return; loaded = true;
-      var s = document.createElement('script');
-      s.async = true; s.src = 'https://www.instagram.com/embed.js';
-      document.body.appendChild(s);
-    }
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        if (entries.some(function (e) { return e.isIntersecting; })) { loadEmbeds(); io.disconnect(); }
-      }, { rootMargin: '600px 0px' });
-      io.observe(postsBox);
-    } else {
-      loadEmbeds();
-    }
-  }
+  // ---- Instagram links (gallery) ----
+  document.querySelectorAll('.js-instagram').forEach(function (el) {
+    el.addEventListener('click', function () { track('instagram', el.dataset.origin || 'galeria'); });
+  });
 })();
