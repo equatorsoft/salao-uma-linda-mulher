@@ -51,6 +51,7 @@
     postsBox.hidden = false;
     document.getElementById('insta-card').hidden = true;
     document.getElementById('insta-more').hidden = false;
+    document.getElementById('insta-hint').hidden = false;
 
     var loaded = false;
     function loadEmbeds() {

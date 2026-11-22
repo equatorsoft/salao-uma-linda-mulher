@@ -18,6 +18,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 
@@ -131,8 +132,17 @@ a { color: inherit; }
 .insta-card__text { color: var(--rose-50); font-size: .95rem; }
 .insta-card__handle { margin-top: 10px; font-weight: 600; background: rgba(255,255,255,.18); padding: 8px 16px; border-radius: 999px; }
 
-.insta-posts { display: grid; grid-template-columns: 1fr; gap: 16px; justify-items: center; margin-bottom: 28px; }
-.insta-posts .instagram-media { margin: 0 !important; min-width: 0 !important; width: 100% !important; max-width: 420px !important; }
+/* Mobile: horizontal swipe carousel */
+.insta-posts {
+  display: grid; grid-auto-flow: column; grid-auto-columns: min(86%, 340px);
+  gap: 14px; margin: 0 -16px 12px; padding: 4px 16px 12px;
+  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.insta-posts > * { scroll-snap-align: center; }
+.insta-posts iframe.instagram-media { min-width: 0 !important; }
+.insta-hint { text-align: center; font-size: .85rem; color: var(--brown-soft); margin: 0 0 20px; }
+.insta-posts .instagram-media { margin: 0 !important; min-width: 0 !important; width: 100% !important; max-width: 100% !important; }
 .insta-more { margin-top: 8px; }
 
 /* Reasons */
@@ -191,7 +201,6 @@ a { color: inherit; }
 @media (min-width: 640px) {
   .services { grid-template-columns: repeat(2, 1fr); }
   .service--featured { grid-column: 1 / -1; }
-  .insta-posts { grid-template-columns: repeat(2, 1fr); align-items: start; }
   .reasons { grid-template-columns: repeat(3, 1fr); }
 }
 @media (min-width: 900px) {
@@ -199,7 +208,9 @@ a { color: inherit; }
   .leaf--hero-left { width: 150px; left: 20px; }
   .leaf--hero-right { width: 130px; right: 30px; }
   .services { grid-template-columns: repeat(3, 1fr); }
-  .insta-posts { grid-template-columns: repeat(3, 1fr); }
+  .insta-posts { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(3, 1fr); align-items: start; gap: 20px; margin: 0 0 28px; padding: 0; overflow: visible; }
+  .insta-hint { display: none; }
+  .insta-posts > :nth-child(n+7) { display: none !important; }
   .service--featured { grid-column: span 3; }
   .location { grid-template-columns: 1fr 1.2fr; align-items: center; }
   .footer { padding-bottom: 40px; }

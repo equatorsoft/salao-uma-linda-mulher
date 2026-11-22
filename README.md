@@ -29,7 +29,8 @@ Quase tudo fica em **`config.js`**:
      "https://www.instagram.com/p/BBBBBBBBBBB/",
    ],
    ```
-3. De 3 a 6 posts é o ideal: cada post incorporado deixa a página mais pesada.
+3. No celular os posts aparecem num carrossel (arrastar para o lado); no computador, em grade com os 6 primeiros.
+   A ordem da lista é a ordem na página. Evite passar de ~9: cada post incorporado deixa a página mais pesada.
 
 Os posts são carregados só quando a pessoa rola até a seção, para a página abrir rápido.
 Se a lista estiver vazia, aparece um cartão que leva direto para o perfil.
