@@ -56,6 +56,15 @@ URL: https://equatorsoft.github.io/salao-uma-linda-mulher/
 Domínio próprio (opcional): crie um arquivo `CNAME` com o domínio (ex.: `umalindamulher.com.br`)
 e aponte o DNS conforme a [documentação do GitHub Pages](https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site).
 
+## SEO
+
+- `robots.txt` e `sitemap.xml` estão na raiz do site. No endereço `equatorsoft.github.io/salao-uma-linda-mulher/`
+  o Google não lê o `robots.txt` (ele precisa estar na raiz do domínio), então envie o sitemap pelo
+  [Google Search Console](https://search.google.com/search-console). Com domínio próprio, os dois passam a valer direto.
+- Ao trocar de domínio, atualize as URLs em `index.html` (`canonical`, `og:url`, `og:image`, JSON-LD),
+  `robots.txt` e `sitemap.xml`.
+- O que mais ajuda nas buscas locais é o **Perfil da Empresa no Google** apontando para este site.
+
 ## Testar localmente
 
 ```sh
