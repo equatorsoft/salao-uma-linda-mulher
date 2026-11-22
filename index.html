@@ -6,12 +6,19 @@
   <title>Salão de Beleza Uma Linda Mulher | Ananindeua – PA</title>
   <meta name="description" content="Salão de Beleza Uma Linda Mulher em Águas Brancas, Ananindeua. Realinhamento térmico, selagem orgânica, botox, cauterização, reconstrução, cronograma capilar e coloração. Aberto todos os dias, das 8h às 22h.">
   <meta name="theme-color" content="#c9798f">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" as="image" href="assets/logo.webp" type="image/webp">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="Salão de Beleza Uma Linda Mulher">
   <meta property="og:description" content="Cabelos lindos e bem cuidados em Ananindeua. Agende pelo WhatsApp — aberto todos os dias, das 8h às 22h.">
+  <meta property="og:url" content="https://equatorsoft.github.io/salao-uma-linda-mulher/">
+  <meta property="og:image" content="https://equatorsoft.github.io/salao-uma-linda-mulher/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logo do Salão de Beleza Uma Linda Mulher">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +39,8 @@
       "addressCountry": "BR"
     },
     "openingHours": "Mo-Su 08:00-22:00",
+    "image": "https://equatorsoft.github.io/salao-uma-linda-mulher/assets/og-image.jpg",
+    "logo": "https://equatorsoft.github.io/salao-uma-linda-mulher/assets/logo.png",
     "sameAs": ["https://www.instagram.com/salaodebeleza.umalindamulher/"]
   }
   </script>
@@ -52,9 +61,14 @@
       <svg class="leaf leaf--hero-left" viewBox="0 0 120 220" aria-hidden="true"><use href="#leaf"/></svg>
       <svg class="leaf leaf--hero-right" viewBox="0 0 120 220" aria-hidden="true"><use href="#leaf"/></svg>
       <div class="container hero__inner">
+        <picture class="hero__logo">
+          <source srcset="assets/logo.webp" type="image/webp">
+          <img src="assets/logo.png" alt="Logo do Salão de Beleza Uma Linda Mulher" width="890" height="900" fetchpriority="high">
+        </picture>
+        <div class="hero__content">
         <p class="eyebrow">Salão de Beleza · Ananindeua – PA</p>
         <h1 class="hero__title">
-          <span class="script">Uma Linda Mulher</span>
+          <span class="visually-hidden">Salão de Beleza Uma Linda Mulher — </span>
           <span class="hero__subtitle">Seu cabelo lindo, saudável e do jeito que você sempre quis.</span>
         </h1>
         <p class="hero__text">Especialistas em alisamento, tratamentos capilares e coloração. Atendimento todos os dias, das 8h às 22h, em Águas Brancas.</p>
@@ -70,6 +84,7 @@
           <li>Das 8h às 22h</li>
           <li>Conj. Girassol · Águas Brancas</li>
         </ul>
+        </div>
       </div>
     </section>
 
