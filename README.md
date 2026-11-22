@@ -16,23 +16,29 @@ Quase tudo fica em **`config.js`**:
 |---|---|
 | `whatsappNumber` | Número usado em todos os botões "Agendar" (DDI + DDD, só dígitos). |
 | `whatsappMessage` | Mensagem que já aparece digitada no WhatsApp. |
-| `instagramPosts` | Links de posts do Instagram exibidos em "Nossos trabalhos". |
+| `campaignMessages` | Mensagem do WhatsApp específica para cada campanha (opcional). |
 | `metaPixelId` | ID do Pixel da Meta. Vazio = Pixel desligado. |
 
-### Posts do Instagram em "Nossos trabalhos"
+### Mensagem do WhatsApp por campanha
 
-1. No Instagram, abra o post → `...` → **Copiar link**.
-2. Cole em `instagramPosts`, um por linha, entre aspas e com vírgula:
-   ```js
-   instagramPosts: [
-     "https://www.instagram.com/p/AAAAAAAAAAA/",
-     "https://www.instagram.com/p/BBBBBBBBBBB/",
-   ],
-   ```
-3. De 3 a 6 posts é o ideal: cada post incorporado deixa a página mais pesada.
+No Gerenciador de Anúncios, em cada anúncio: **Rastreamento → Parâmetros de URL** →
+`utm_source=meta&utm_medium=paid&utm_campaign={{campaign.name}}`.
 
-Os posts são carregados só quando a pessoa rola até a seção, para a página abrir rápido.
-Se a lista estiver vazia, aparece um cartão que leva direto para o perfil.
+- Sem nada configurado, a mensagem fica: *"Olá! Vi o anúncio e gostaria de agendar um horário no Uma Linda Mulher. (anúncio: Nome da Campanha)"* —
+  assim o salão sabe de qual campanha a cliente veio.
+- Para uma mensagem própria, adicione em `campaignMessages` (nome da campanha em minúsculas, sem acento, com `-`):
+  ```js
+  campaignMessages: {
+    "alisamento-dezembro": "Olá! Vi o anúncio de alisamento e gostaria de agendar um horário.",
+  },
+  ```
+- Quem chega sem anúncio (Instagram, Google) recebe a mensagem padrão.
+
+### Fotos ("Antes e depois" e "Nossos trabalhos")
+
+Ficam em `assets/trabalhos/`, em WebP, em dois tamanhos (`-300`/`-600` na galeria, `-360`/`-720` no antes e depois).
+Cada foto da galeria abre o reel correspondente no Instagram — o link e o texto alternativo estão no `index.html`,
+na seção `<!-- GALERIA -->`. Para trocar uma foto, substitua os dois arquivos mantendo o nome (proporção 2:3, em pé).
 
 ### Meta Pixel
 
@@ -43,7 +49,8 @@ Se a lista estiver vazia, aparece um cartão que leva direto para o perfil.
    - `Contact` (padrão) e `WhatsAppClick` (personalizado) — a cada clique em um botão de WhatsApp,
      com o parâmetro `origin` indicando qual botão foi clicado (hero, servicos, botao-flutuante…).
 
-   Use `Contact` como evento de conversão nas campanhas.
+   Use `Contact` como evento de conversão nas campanhas. Cliques nas fotos da galeria geram `InstagramClick`.
+   Todos os eventos levam o parâmetro `campaign` (ou `organico`).
 
 ## Publicação (GitHub Pages)
 
@@ -54,6 +61,19 @@ URL: https://equatorsoft.github.io/salao-uma-linda-mulher/
 
 Domínio próprio (opcional): crie um arquivo `CNAME` com o domínio (ex.: `umalindamulher.com.br`)
 e aponte o DNS conforme a [documentação do GitHub Pages](https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site).
+
+## SEO
+
+- `robots.txt` e `sitemap.xml` estão na raiz do site. No endereço `equatorsoft.github.io/salao-uma-linda-mulher/`
+  o Google não lê o `robots.txt` (ele precisa estar na raiz do domínio), então envie o sitemap pelo
+  [Google Search Console](https://search.google.com/search-console). Com domínio próprio, os dois passam a valer direto.
+- Ao trocar de domínio, atualize as URLs em `index.html` (`canonical`, `og:url`, `og:image`, JSON-LD),
+  `robots.txt` e `sitemap.xml`.
+- O que mais ajuda nas buscas locais é o **Perfil da Empresa no Google** apontando para este site.
+
+## Fontes
+
+As fontes (Poppins e Great Vibes) estão em `assets/fonts/`, servidas pelo próprio site — não há chamadas ao Google Fonts.
 
 ## Testar localmente
 
