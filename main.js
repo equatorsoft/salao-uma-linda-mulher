@@ -21,8 +21,8 @@
     return campaignLabel ? base + ' (anúncio: ' + campaignLabel + ')' : base;
   }
 
-  // ---- Meta Pixel (only loads when an ID is configured) ----
-  if (cfg.metaPixelId) {
+  // ---- Meta Pixel: only loads when an ID is configured AND the visitor accepted cookies ----
+  function loadPixel() {
     /* eslint-disable */
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -33,6 +33,7 @@
     window.fbq('init', cfg.metaPixelId);
     window.fbq('track', 'PageView');
   }
+  if (cfg.metaPixelId && window.SiteConsent) window.SiteConsent.onGrant(loadPixel);
 
   function track(event, origin) {
     if (typeof window.fbq !== 'function') return;
@@ -56,6 +57,17 @@
     el.setAttribute('target', '_blank');
     el.setAttribute('rel', 'noopener');
     el.addEventListener('click', function () { track('whatsapp', el.dataset.origin || 'link'); });
+  });
+
+  // ---- Google Maps: loaded only when the visitor asks for it (Google may set cookies) ----
+  document.querySelectorAll('.js-map-load').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var iframe = document.createElement('iframe');
+      iframe.title = btn.getAttribute('data-title');
+      iframe.src = btn.getAttribute('data-src');
+      iframe.referrerPolicy = 'no-referrer-when-downgrade';
+      btn.replaceWith(iframe);
+    });
   });
 
   // ---- Directions link ----

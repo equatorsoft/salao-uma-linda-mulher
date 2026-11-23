@@ -253,7 +253,11 @@
           </div>
         </div>
         <div class="location__map">
-          <iframe title="Mapa: Rua das Flores, 55 – Conjunto Girassol, Águas Brancas, Ananindeua – PA" src="https://maps.google.com/maps?q=-1.397611,-48.370887&amp;z=17&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <button type="button" class="map-load js-map-load" data-title="Mapa: Rua das Flores, 55 – Conjunto Girassol, Águas Brancas, Ananindeua – PA" data-src="https://maps.google.com/maps?q=-1.397611,-48.370887&amp;z=17&amp;output=embed">
+            <svg class="map-load__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+            <span class="map-load__title">Mostrar mapa</span>
+            <span class="map-load__text">O mapa é do Google, que pode gravar cookies ao ser aberto.</span>
+          </button>
         </div>
       </div>
     </section>
@@ -280,6 +284,10 @@
       <p class="footer__links">
         <a class="js-whatsapp" href="#" data-origin="footer">WhatsApp (91) 99209-3911</a>
         <a href="https://www.instagram.com/salaodebeleza.umalindamulher/" target="_blank" rel="noopener">Instagram</a>
+      </p>
+      <p class="footer__links footer__legal">
+        <a href="privacidade.html">Privacidade e cookies</a>
+        <a href="#" class="js-consent-open">Preferências de cookies</a>
       </p>
     </div>
   </footer>
@@ -309,9 +317,8 @@
     </symbol>
   </svg>
 
-  <!-- Meta Pixel fallback for browsers without JavaScript (keep the ID in sync with config.js) -->
-  <noscript><img hidden height="1" width="1" alt="" src="https://www.facebook.com/tr?id=1722871092960929&amp;ev=PageView&amp;noscript=1"></noscript>
   <script src="config.js"></script>
+  <script src="consent.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
