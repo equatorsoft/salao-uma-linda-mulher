@@ -71,6 +71,12 @@ e aponte o DNS conforme a [documentação do GitHub Pages](https://docs.github.c
   `robots.txt` e `sitemap.xml`.
 - O que mais ajuda nas buscas locais é o **Perfil da Empresa no Google** apontando para este site.
 
+## Localização
+
+Coordenadas do salão: `-1.397611, -48.370887`. Elas são usadas no mapa incorporado, no botão "Como chegar"
+(rota do Google Maps até o salão) e nos dados estruturados (`geo`) do `index.html`. Se o salão mudar de lugar,
+troque as três ocorrências.
+
 ## Fontes
 
 As fontes (Poppins e Great Vibes) estão em `assets/fonts/`, servidas pelo próprio site — não há chamadas ao Google Fonts.
