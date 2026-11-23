@@ -77,6 +77,17 @@ Coordenadas do salão: `-1.397611, -48.370887`. Elas são usadas no mapa incorpo
 (rota do Google Maps até o salão) e nos dados estruturados (`geo`) do `index.html`. Se o salão mudar de lugar,
 troque as três ocorrências.
 
+## Privacidade e cookies (LGPD)
+
+- `privacidade.html`: aviso de privacidade e cookies (link no rodapé de todas as páginas).
+- `consent.js`: banner com **Aceitar** e **Recusar** no mesmo destaque. O Meta Pixel **só carrega depois do aceite**;
+  a escolha fica no navegador da pessoa (`localStorage`, chave `ulm-consent-v1`) e pode ser mudada em
+  "Preferências de cookies". Ao recusar depois de aceitar, os cookies `_fbp`/`_fbc` são apagados e a página recarrega.
+- O mapa do Google só é carregado quando a pessoa clica em "Mostrar mapa".
+- Consequência: quem recusa não aparece nas métricas do Pixel.
+- Ao mudar algo que coleta dados (novo script, formulário, outro pixel), atualize `privacidade.html` e a data no topo.
+- Isto segue o Guia de Cookies da ANPD e os Termos das Ferramentas de Negócios da Meta, mas não é aconselhamento jurídico.
+
 ## Fontes
 
 As fontes (Poppins e Great Vibes) estão em `assets/fonts/`, servidas pelo próprio site — não há chamadas ao Google Fonts.
