@@ -40,6 +40,8 @@
     if (event === 'whatsapp') {
       window.fbq('track', 'Contact', data);
       window.fbq('trackCustom', 'WhatsAppClick', data);
+    } else if (event === 'directions') {
+      window.fbq('track', 'FindLocation', data);
     } else {
       window.fbq('trackCustom', 'InstagramClick', data);
     }
@@ -54,6 +56,11 @@
     el.setAttribute('target', '_blank');
     el.setAttribute('rel', 'noopener');
     el.addEventListener('click', function () { track('whatsapp', el.dataset.origin || 'link'); });
+  });
+
+  // ---- Directions link ----
+  document.querySelectorAll('.js-directions').forEach(function (el) {
+    el.addEventListener('click', function () { track('directions', el.dataset.origin || 'mapa'); });
   });
 
   // ---- Instagram links (gallery) ----
