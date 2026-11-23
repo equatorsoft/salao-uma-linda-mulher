@@ -13,7 +13,7 @@ window.SITE_CONFIG = {
   // Campanhas que não estiverem aqui usam a mensagem padrão + "(anúncio: <nome da campanha>)",
   // para o salão saber de onde a cliente veio.
   campaignMessages: {
-    // "alisamento-dezembro": "Olá! Vi o anúncio de alisamento e gostaria de agendar um horário.",
+    "alisamento-dezembro": "Olá! Vi o anúncio do alisamento (realinhamento térmico) e gostaria de agendar um horário no Uma Linda Mulher.",
   },
 
   // ID do Pixel da Meta (Gerenciador de Eventos). Deixe vazio para desativar.
