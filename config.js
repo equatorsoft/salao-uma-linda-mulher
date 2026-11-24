@@ -17,5 +17,5 @@ window.SITE_CONFIG = {
   },
 
   // ID do Pixel da Meta (Gerenciador de Eventos). Deixe vazio para desativar.
-  metaPixelId: "1722871092960929"
+  metaPixelId: "41399295526336104"
 };
